@@ -33,8 +33,9 @@ y_train[:, 1] = y_train[:, 1] * fraud_weighting
 # Allow me to construct a tensor of 30 elements corresponding to the Inputs column number
 Inputs_dimensions = Inputs_array.shape[1]
 Outputs_dimensions = Targets_array.shape[1]
-hidden_layer_1_cells = 100
-hidden_layer_2_cells = 150
+hidden_layer_1_cells = 150
+hidden_layer_2_cells = 200
+hidden_layer_3_cells = 150
 
 X_train_node = tf.compat.v1.placeholder("float32", [None, Inputs_dimensions], name="X_train")
 y_train_node = tf.compat.v1.placeholder("float32", [None, Outputs_dimensions], name="y_train")
@@ -48,8 +49,11 @@ biases_node_1 = tf.compat.v1.Variable(tf.compat.v1.zeros([hidden_layer_1_cells],
 weights_node_2 = tf.compat.v1.Variable(tf.compat.v1.zeros([hidden_layer_1_cells, hidden_layer_2_cells], name="weight_2"))
 biases_node_2 = tf.compat.v1.Variable(tf.compat.v1.zeros([hidden_layer_2_cells], name="biases_2"))
 # weights and biases for the 3rd hidden layer
-weights_node_3 = tf.compat.v1.Variable(tf.compat.v1.zeros([hidden_layer_2_cells, Outputs_dimensions], name="weight_3"))
-biases_node_3 = tf.compat.v1.Variable(tf.compat.v1.zeros([Outputs_dimensions], name="biases_3"))
+weights_node_3 = tf.compat.v1.Variable(tf.compat.v1.zeros([hidden_layer_2_cells, hidden_layer_3_cells], name="weight_3"))
+biases_node_3 = tf.compat.v1.Variable(tf.compat.v1.zeros([hidden_layer_3_cells], name="biases_3"))
+# weights and biases for the output layer
+weights_node_4 = tf.compat.v1.Variable(tf.compat.v1.zeros([hidden_layer_3_cells, Outputs_dimensions], name="weight_4"))
+biases_node_4 = tf.compat.v1.Variable(tf.compat.v1.zeros([Outputs_dimensions], name="biases_4"))
 
 
 # Build the network function to connection the layers
@@ -57,8 +61,11 @@ def network_function(input_tensor):
     hidden_layer_1 = tf.compat.v1.nn.sigmoid(tf.compat.v1.matmul(input_tensor, weights_node_1) + biases_node_1)
     hidden_layer_2 = tf.compat.v1.nn.dropout(
         tf.compat.v1.nn.sigmoid(tf.compat.v1.matmul(hidden_layer_1, weights_node_2) + biases_node_2),
-        rate=0.15)
-    output_layer = tf.compat.v1.nn.softmax(tf.compat.v1.matmul(hidden_layer_2, weights_node_3) + biases_node_3)
+        rate=0.2)
+    hidden_layer_3 = tf.compat.v1.nn.dropout(
+        tf.compat.v1.nn.sigmoid(tf.compat.v1.matmul(hidden_layer_2, weights_node_3) + biases_node_3),
+        rate=0.5)
+    output_layer = tf.compat.v1.nn.softmax(tf.compat.v1.matmul(hidden_layer_3, weights_node_4) + biases_node_4)
     return output_layer
 
 
@@ -68,7 +75,7 @@ y_test_prediction = network_function(X_test_node)
 # Compute the loss function
 cross_entropy_loss = tf.compat.v1.losses.softmax_cross_entropy(y_train_node, y_train_prediction)
 # Create an optimizer to minimize the loss
-optimizer = tf.compat.v1.train.AdamOptimizer(learning_rate=0.0005).minimize(cross_entropy_loss)
+optimizer = tf.compat.v1.train.AdamOptimizer(learning_rate=0.001).minimize(cross_entropy_loss)
 
 
 # Calculate the accuracy of the prediction
@@ -83,9 +90,6 @@ epochs = 10000
 checkpoint = "./sigmoid_v2_weights.ckpt"
 
 with tf.compat.v1.Session() as session:
-    epochs_with_no_improvement = 0
-    cross_entropy_record = []
-    epochs_checking_threshold = 1000
     tf.compat.v1.global_variables_initializer().run()
     for epoch in range(1, epochs + 1):
         start_time = time.time()
@@ -95,7 +99,6 @@ with tf.compat.v1.Session() as session:
                                                         y_train_node: y_train})
         # print out cross entropy score every 5 epochs
         if epoch % 10 == 0:
-            cross_entropy_record.append(cross_entropy_score)
             end_time = time.time()
             time_taken = end_time - start_time
             print("Epoch: {}".format(epoch),
@@ -116,15 +119,7 @@ with tf.compat.v1.Session() as session:
             print("I will save this weight file now!")
             saver = tf.compat.v1.train.Saver()
             saver.save(session, checkpoint)
-            if cross_entropy_score < cross_entropy_record.min():
-                print("Good training so far! Keep going!")
-                epochs_with_no_improvement = 0
-            else:
-                print("Houston, we have a problem!!")
-                epochs_with_no_improvement += 100
-            if epochs_with_no_improvement == epochs_checking_threshold:
-                print("Training Terminated. No more improvements can be made")
-                break
+
 
 
 
