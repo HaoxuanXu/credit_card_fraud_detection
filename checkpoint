@@ -1,2 +1,2 @@
-model_checkpoint_path: "sigmoid_v2_weights.ckpt"
-all_model_checkpoint_paths: "sigmoid_v2_weights.ckpt"
+model_checkpoint_path: "sigmoid_weights.ckpt"
+all_model_checkpoint_paths: "sigmoid_weights.ckpt"

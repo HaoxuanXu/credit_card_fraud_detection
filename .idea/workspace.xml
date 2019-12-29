@@ -3,13 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="87c53026-562d-46ca-8a5a-89c83023d071" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoint" beforeDir="false" afterPath="$PROJECT_DIR$/checkpoint" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fraud_detection_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/fraud_detection_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigmoid_v2_weights.ckpt.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigmoid_v2_weights.ckpt.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigmoid_v2_weights.ckpt.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigmoid_weights.ckpt.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigmoid_weights.ckpt.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sigmoid_weights.ckpt.meta" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
