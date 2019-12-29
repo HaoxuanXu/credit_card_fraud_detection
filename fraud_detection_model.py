@@ -27,7 +27,7 @@ training_size = int(0.8 * len(Inputs_array))
 # Adding weighting to the fraud class to tackle the imbalanced data problem
 fraud_ratio = credit_info["Class"].value_counts()[1] / len(credit_info)
 fraud_weighting = 1 / fraud_ratio
-y_train[:, 1] = y_train[:, 1] * fraud_weighting
+y_train[:, 1] = y_train[:, 1] * fraud_weighting * 2
 
 ############ BUILDING THE COMPUTATIONAL GRAPH ########################
 # Allow me to construct a tensor of 30 elements corresponding to the Inputs column number
@@ -86,8 +86,8 @@ def accuracy_calculate(actual_amount, predicted_amount):
 
 
 # Training the model
-epochs = 10000
-checkpoint = "./sigmoid_v2_weights.ckpt"
+epochs = 2000
+checkpoint = "./sigmoid_weights.ckpt"
 
 with tf.compat.v1.Session() as session:
     tf.compat.v1.global_variables_initializer().run()
