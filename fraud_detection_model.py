@@ -27,7 +27,7 @@ training_size = int(0.8 * len(Inputs_array))
 # Adding weighting to the fraud class to tackle the imbalanced data problem
 fraud_ratio = credit_info["Class"].value_counts()[1] / len(credit_info)
 fraud_weighting = 1 / fraud_ratio
-y_train[:, 1] = y_train[:, 1] * fraud_weighting * 1
+y_train[:, 1] = y_train[:, 1] * fraud_weighting * 1.2
 
 ############ BUILDING THE COMPUTATIONAL GRAPH ########################
 # Allow me to construct a tensor of 30 elements corresponding to the Inputs column number
@@ -35,7 +35,7 @@ Inputs_dimensions = Inputs_array.shape[1]
 Outputs_dimensions = Targets_array.shape[1]
 hidden_layer_1_cells = 100
 hidden_layer_2_cells = 150
-hidden_layer_3_cells = 150
+
 
 X_train_node = tf.compat.v1.placeholder("float32", [None, Inputs_dimensions], name="X_train")
 y_train_node = tf.compat.v1.placeholder("float32", [None, Outputs_dimensions], name="y_train")
@@ -49,11 +49,9 @@ biases_node_1 = tf.compat.v1.Variable(tf.compat.v1.random.normal([hidden_layer_1
 weights_node_2 = tf.compat.v1.Variable(tf.compat.v1.random.normal([hidden_layer_1_cells, hidden_layer_2_cells], name="weight_2"))
 biases_node_2 = tf.compat.v1.Variable(tf.compat.v1.random.normal([hidden_layer_2_cells], name="biases_2"))
 # weights and biases for the 3rd hidden layer
-weights_node_3 = tf.compat.v1.Variable(tf.compat.v1.random.normal([hidden_layer_2_cells, hidden_layer_3_cells], name="weight_3"))
-biases_node_3 = tf.compat.v1.Variable(tf.compat.v1.random.normal([hidden_layer_3_cells], name="biases_3"))
-# weights and biases for the output layer
-weights_node_4 = tf.compat.v1.Variable(tf.compat.v1.random.normal([hidden_layer_3_cells, Outputs_dimensions], name="weight_4"))
-biases_node_4 = tf.compat.v1.Variable(tf.compat.v1.random.normal([Outputs_dimensions], name="biases_4"))
+weights_node_3 = tf.compat.v1.Variable(tf.compat.v1.random.normal([hidden_layer_2_cells, Outputs_dimensions], name="weight_3"))
+biases_node_3 = tf.compat.v1.Variable(tf.compat.v1.random.normal([Outputs_dimensions], name="biases_3"))
+
 
 
 # Build the network function to connection the layers
@@ -62,10 +60,7 @@ def network_function(input_tensor):
     hidden_layer_2 = tf.compat.v1.nn.dropout(
         tf.compat.v1.nn.sigmoid(tf.compat.v1.matmul(hidden_layer_1, weights_node_2) + biases_node_2),
         rate=0.2)
-    hidden_layer_3 = tf.compat.v1.nn.dropout(
-        tf.compat.v1.nn.sigmoid(tf.compat.v1.matmul(hidden_layer_2, weights_node_3) + biases_node_3),
-        rate=0.5)
-    output_layer = tf.compat.v1.nn.softmax(tf.compat.v1.matmul(hidden_layer_3, weights_node_4) + biases_node_4)
+    output_layer = tf.compat.v1.nn.softmax(tf.compat.v1.matmul(hidden_layer_2, weights_node_3) + biases_node_3)
     return output_layer
 
 
@@ -86,8 +81,8 @@ def accuracy_calculate(actual_amount, predicted_amount):
 
 
 # Training the model
-epochs = 2000
-checkpoint = "./sigmoid_weights.ckpt"
+epochs = 1000
+checkpoint = "./sigmoid_v2_weights.ckpt"
 
 with tf.compat.v1.Session() as session:
     tf.compat.v1.global_variables_initializer().run()
@@ -119,6 +114,7 @@ with tf.compat.v1.Session() as session:
             print("I will save this weight file now!")
             saver = tf.compat.v1.train.Saver()
             saver.save(session, checkpoint)
+            print("I have saved this weight file!")
 
 
 
