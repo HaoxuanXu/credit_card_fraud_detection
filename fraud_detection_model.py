@@ -27,7 +27,7 @@ training_size = int(0.8 * len(Inputs_array))
 # Adding weighting to the fraud class to tackle the imbalanced data problem
 fraud_ratio = credit_info["Class"].value_counts()[1] / len(credit_info)
 fraud_weighting = 1 / fraud_ratio
-y_train[:, 1] = y_train[:, 1] * fraud_weighting * 2
+y_train[:, 1] = y_train[:, 1] * fraud_weighting * 1.2
 
 ############ BUILDING THE COMPUTATIONAL GRAPH ########################
 # Allow me to construct a tensor of 30 elements corresponding to the Inputs column number
@@ -43,17 +43,17 @@ X_test_node = tf.compat.v1.constant(X_test, name="X_test")
 y_test_node = tf.compat.v1.constant(y_test, name="y_test")
 
 # weights and biases for the 1st hidden layer
-weights_node_1 = tf.compat.v1.Variable(tf.compat.v1.zeros([Inputs_dimensions, hidden_layer_1_cells], name="weight_1"))
-biases_node_1 = tf.compat.v1.Variable(tf.compat.v1.zeros([hidden_layer_1_cells], name="biases_1"))
+weights_node_1 = tf.compat.v1.Variable(tf.compat.v1.random.uniform([Inputs_dimensions, hidden_layer_1_cells], name="weight_1"))
+biases_node_1 = tf.compat.v1.Variable(tf.compat.v1.random.uniform([hidden_layer_1_cells], name="biases_1"))
 # weights and biases for the 2nd hidden layer
-weights_node_2 = tf.compat.v1.Variable(tf.compat.v1.zeros([hidden_layer_1_cells, hidden_layer_2_cells], name="weight_2"))
-biases_node_2 = tf.compat.v1.Variable(tf.compat.v1.zeros([hidden_layer_2_cells], name="biases_2"))
+weights_node_2 = tf.compat.v1.Variable(tf.compat.v1.random.uniform([hidden_layer_1_cells, hidden_layer_2_cells], name="weight_2"))
+biases_node_2 = tf.compat.v1.Variable(tf.compat.v1.random.uniform([hidden_layer_2_cells], name="biases_2"))
 # weights and biases for the 3rd hidden layer
-weights_node_3 = tf.compat.v1.Variable(tf.compat.v1.zeros([hidden_layer_2_cells, hidden_layer_3_cells], name="weight_3"))
-biases_node_3 = tf.compat.v1.Variable(tf.compat.v1.zeros([hidden_layer_3_cells], name="biases_3"))
+weights_node_3 = tf.compat.v1.Variable(tf.compat.v1.random.uniform([hidden_layer_2_cells, hidden_layer_3_cells], name="weight_3"))
+biases_node_3 = tf.compat.v1.Variable(tf.compat.v1.random.uniform([hidden_layer_3_cells], name="biases_3"))
 # weights and biases for the output layer
-weights_node_4 = tf.compat.v1.Variable(tf.compat.v1.zeros([hidden_layer_3_cells, Outputs_dimensions], name="weight_4"))
-biases_node_4 = tf.compat.v1.Variable(tf.compat.v1.zeros([Outputs_dimensions], name="biases_4"))
+weights_node_4 = tf.compat.v1.Variable(tf.compat.v1.random.uniform([hidden_layer_3_cells, Outputs_dimensions], name="weight_4"))
+biases_node_4 = tf.compat.v1.Variable(tf.compat.v1.random.uniform([Outputs_dimensions], name="biases_4"))
 
 
 # Build the network function to connection the layers
