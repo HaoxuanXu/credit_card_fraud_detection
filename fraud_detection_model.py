@@ -125,7 +125,7 @@ with tf.compat.v1.Session() as session:
             if epochs_with_no_improvement == epochs_checking_threshold:
                 print("Training Terminated. No more improvements can be made")
                 break
-        break
+
 
 
 
