@@ -5,6 +5,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/checkpoint" beforeDir="false" afterPath="$PROJECT_DIR$/checkpoint" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fraud_detection_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/fraud_detection_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sigmoid_v2_weights.ckpt.data-00000-of-00001" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sigmoid_v2_weights.ckpt.index" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sigmoid_v2_weights.ckpt.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/sigmoid_weights.ckpt.data-00000-of-00001" beforeDir="false" afterPath="$PROJECT_DIR$/sigmoid_weights.ckpt.data-00000-of-00001" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sigmoid_weights.ckpt.index" beforeDir="false" afterPath="$PROJECT_DIR$/sigmoid_weights.ckpt.index" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sigmoid_weights.ckpt.meta" beforeDir="false" afterPath="$PROJECT_DIR$/sigmoid_weights.ckpt.meta" afterDir="false" />
@@ -90,7 +93,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
