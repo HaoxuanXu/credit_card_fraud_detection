@@ -138,6 +138,7 @@ with tf.compat.v1.Session() as session:
                 saver = tf.compat.v1.train.Saver()
                 saver.save(session, checkpoint)
 
+        if epoch % 100 == 0:
             print("Epoch: {}".format(epoch),
                   "         Current Loss Score: {0:.4f}".format(cross_entropy_score),
                   "         Time needed to run 10 epochs: {} seconds".format(round(time_taken, 2)))
