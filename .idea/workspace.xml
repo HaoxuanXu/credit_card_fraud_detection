@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="87c53026-562d-46ca-8a5a-89c83023d071" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/Credit_Card_Fraud_Detection_Classical_Models-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/Credit_Card_Fraud_Detection_Classical_Models-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Credit_Card_Fraud_Detection_Classical_Models.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Credit_Card_Fraud_Detection_Classical_Models.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud_detection_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/fraud_detection_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Random_Forest_eval_dist.png" beforeDir="false" afterPath="$PROJECT_DIR$/Random_Forest_eval_dist.png" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
