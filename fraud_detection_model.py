@@ -5,6 +5,7 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 import tensorflow as tf
 import time
+import pyjokes
 import warnings
 
 warnings.filterwarnings("ignore")
@@ -146,6 +147,7 @@ with tf.compat.v1.Session() as session:
             print("Current Overall Accuracy Rate: {0:.2f}%".format(final_accuracy))
             print("Current Fraud Prediction Accuracy Rate (Precision): {0:.2f}%".format(final_precision))
             print("Current Fraud Detection Rate (Recall): {0:.2f}%".format(final_recall))
+            print(pyjokes.get_joke())
 
     print("Best Accuracy: {0: .4f}%".format(final_accuracy))
     print("Best Precision: {0: .2f}%".format(final_precision))
